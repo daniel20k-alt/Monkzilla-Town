@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		EECE691A251003270023D948 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EECE6919251003270023D948 /* AppDelegate.swift */; };
 		EECE691C251003270023D948 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = EECE691B251003270023D948 /* GameScene.sks */; };
-		EECE691E251003270023D948 /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = EECE691D251003270023D948 /* Actions.sks */; };
 		EECE6920251003270023D948 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = EECE691F251003270023D948 /* GameScene.swift */; };
 		EECE6922251003270023D948 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EECE6921251003270023D948 /* GameViewController.swift */; };
 		EECE6925251003270023D948 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EECE6923251003270023D948 /* Main.storyboard */; };
@@ -21,7 +20,6 @@
 		EECE6916251003270023D948 /* Monkzilla Town.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Monkzilla Town.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EECE6919251003270023D948 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EECE691B251003270023D948 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
-		EECE691D251003270023D948 /* Actions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Actions.sks; sourceTree = "<group>"; };
 		EECE691F251003270023D948 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		EECE6921251003270023D948 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		EECE6924251003270023D948 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -62,7 +60,6 @@
 			children = (
 				EECE6919251003270023D948 /* AppDelegate.swift */,
 				EECE691B251003270023D948 /* GameScene.sks */,
-				EECE691D251003270023D948 /* Actions.sks */,
 				EECE691F251003270023D948 /* GameScene.swift */,
 				EECE6921251003270023D948 /* GameViewController.swift */,
 				EECE6923251003270023D948 /* Main.storyboard */,
@@ -135,7 +132,6 @@
 				EECE691C251003270023D948 /* GameScene.sks in Resources */,
 				EECE69272510032E0023D948 /* Assets.xcassets in Resources */,
 				EECE692A2510032E0023D948 /* LaunchScreen.storyboard in Resources */,
-				EECE691E251003270023D948 /* Actions.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -302,7 +298,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.MeerkatWorks.Monkzilla-Town";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
 		};
@@ -320,7 +316,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.MeerkatWorks.Monkzilla-Town";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Release;
 		};
