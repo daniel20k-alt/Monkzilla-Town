@@ -14,7 +14,7 @@
 		EECE6925251003270023D948 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EECE6923251003270023D948 /* Main.storyboard */; };
 		EECE69272510032E0023D948 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EECE69262510032E0023D948 /* Assets.xcassets */; };
 		EECE692A2510032E0023D948 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EECE69282510032E0023D948 /* LaunchScreen.storyboard */; };
-		EECE6932251110CB0023D948 /* BuildingNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = EECE6931251110CA0023D948 /* BuildingNode.swift */; };
+		EECE6934251213000023D948 /* BuildingNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = EECE6933251213000023D948 /* BuildingNode.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,7 +27,7 @@
 		EECE69262510032E0023D948 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EECE69292510032E0023D948 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EECE692B2510032E0023D948 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		EECE6931251110CA0023D948 /* BuildingNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingNode.swift; sourceTree = "<group>"; };
+		EECE6933251213000023D948 /* BuildingNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingNode.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,6 +44,7 @@
 		EECE690D251003270023D948 = {
 			isa = PBXGroup;
 			children = (
+				EECE6933251213000023D948 /* BuildingNode.swift */,
 				EECE6918251003270023D948 /* Monkzilla Town */,
 				EECE6917251003270023D948 /* Products */,
 			);
@@ -63,7 +64,6 @@
 				EECE6919251003270023D948 /* AppDelegate.swift */,
 				EECE691B251003270023D948 /* GameScene.sks */,
 				EECE691F251003270023D948 /* GameScene.swift */,
-				EECE6931251110CA0023D948 /* BuildingNode.swift */,
 				EECE6921251003270023D948 /* GameViewController.swift */,
 				EECE6923251003270023D948 /* Main.storyboard */,
 				EECE69262510032E0023D948 /* Assets.xcassets */,
@@ -146,7 +146,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EECE6920251003270023D948 /* GameScene.swift in Sources */,
-				EECE6932251110CB0023D948 /* BuildingNode.swift in Sources */,
+				EECE6934251213000023D948 /* BuildingNode.swift in Sources */,
 				EECE6922251003270023D948 /* GameViewController.swift in Sources */,
 				EECE691A251003270023D948 /* AppDelegate.swift in Sources */,
 			);
