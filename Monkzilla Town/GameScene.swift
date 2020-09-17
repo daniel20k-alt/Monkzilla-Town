@@ -41,4 +41,9 @@ class GameScene: SKScene {
             buildings.append(building) //keeping track of all buildings
         }
     }
+        
+        func launch(angle: Int, velocity: Int) {
+            
+        }
+
 }
