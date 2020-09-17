@@ -16,6 +16,7 @@ enum CollisionTypes: UInt32 {
 
 class GameScene: SKScene {
     var buildings = [BuildingNode]()
+    weak var viewController: GameViewController?
     
     override func didMove(to view: SKView) {
         
