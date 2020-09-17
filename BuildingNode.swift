@@ -64,7 +64,6 @@ class BuildingNode: SKSpriteNode {
                     ctx.cgContext.fill(CGRect(x: column, y: row, width: 20, height: 20))
                 }
             }
-            
         }
         return img
     }
