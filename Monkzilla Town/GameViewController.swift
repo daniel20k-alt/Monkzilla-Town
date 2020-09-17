@@ -12,7 +12,14 @@ import GameplayKit
 
 class GameViewController: UIViewController {
     var currentGame: GameScene?
-
+    
+    @IBOutlet var angleSlider: UISlider!
+    @IBOutlet var angleLabel: UILabel!
+    @IBOutlet var velocitySlider: UISlider!
+    @IBOutlet var velocityLabel: UILabel!
+    @IBOutlet var launchButton: UIButton!
+    @IBOutlet var playerNumber: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -24,10 +31,9 @@ class GameViewController: UIViewController {
                 
                 // Present the scene
                 view.presentScene(scene)
-            
-            currentGame = scene as? GameScene
+                
+                currentGame = scene as? GameScene
                 currentGame?.viewController = self
-            
             }
             
             view.ignoresSiblingOrder = true
@@ -35,12 +41,15 @@ class GameViewController: UIViewController {
             view.showsFPS = true
             view.showsNodeCount = true
         }
+        //update the UI when either of the below changed
+        angleChanged(self)
+        velocityChanged(self)
     }
-
+    
     override var shouldAutorotate: Bool {
         return true
     }
-
+    
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         if UIDevice.current.userInterfaceIdiom == .phone {
             return .allButUpsideDown
@@ -48,8 +57,19 @@ class GameViewController: UIViewController {
             return .all
         }
     }
-
+    
     override var prefersStatusBarHidden: Bool {
         return true
+    }
+    
+    @IBAction func angleChanged(_ sender: Any) {
+        angleLabel.text = "Angle: \(Int(angleSlider.value))°"
+    }
+    
+    @IBAction func velocityChanged(_ sender: Any) {
+        velocityLabel.text = "Velocity: \(Int(velocitySlider.value))"
+    }
+    
+    @IBAction func launch(_ sender: Any) {
     }
 }
