@@ -18,6 +18,13 @@ class GameScene: SKScene {
     var buildings = [BuildingNode]()
     weak var viewController: GameViewController?
     
+    //defining the SKSpriteNodes - player 1, player 2 and the throwing object
+    var player1: SKSpriteNode!
+    var player2: SKSpriteNode!
+    var banana: SKSpriteNode!
+    
+    var currentPlayer = 1 //to keep track who's turn it is
+    
     override func didMove(to view: SKView) {
         
         //creating the sky
@@ -45,5 +52,21 @@ class GameScene: SKScene {
         func launch(angle: Int, velocity: Int) {
             
         }
+    
+    func createPlayers() {
+        player1 = SKSpriteNode(imageNamed: "player")
+        player1.name = "player1"
+        player1.physicsBody = SKPhysicsBody(circleOfRadius: player1.size.width / 2)
+        player1.physicsBody?.categoryBitMask = CollisionTypes.player.rawValue //identifying category
+        player1.physicsBody?.collisionBitMask = CollisionTypes.banana.rawValue //who will bounce off
+        player1.physicsBody?.contactTestBitMask = CollisionTypes.banana.rawValue
+        player1.physicsBody?.isDynamic = false
+        
+        let player1Building = buildings[1]
+        player1.position = CGPoint(x: player1Building.position.x, y: player1Building.position.y + (player1Building.size.height + player1.size.height) / 2) //the position of player 1
+        
+        addChild(player1)
+        
+    }
 
 }
