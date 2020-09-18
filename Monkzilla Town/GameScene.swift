@@ -67,6 +67,18 @@ class GameScene: SKScene {
         
         addChild(player1)
         
+        player2 = SKSpriteNode(imageNamed: "player")
+            player2.name = "player2"
+            player2.physicsBody = SKPhysicsBody(circleOfRadius: player2.size.width / 2)
+            player2.physicsBody?.categoryBitMask = CollisionTypes.player.rawValue //identifying category
+            player1.physicsBody?.collisionBitMask = CollisionTypes.banana.rawValue //who will bounce off
+            player1.physicsBody?.contactTestBitMask = CollisionTypes.banana.rawValue
+            player1.physicsBody?.isDynamic = false
+            
+        let player2Building = buildings[buildings.count - 2]
+            player2.position = CGPoint(x: player2Building.position.x, y: player2Building.position.y + (player2Building.size.height + player2.size.height) / 2) //the position of player 2
+            
+            addChild(player2)
+        
     }
-
 }
