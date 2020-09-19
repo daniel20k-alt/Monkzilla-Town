@@ -68,7 +68,34 @@ class GameScene: SKScene {
         banana.physicsBody?.collisionBitMask = CollisionTypes.building.rawValue | CollisionTypes.player.rawValue
         banana.physicsBody?.contactTestBitMask = CollisionTypes.building.rawValue | CollisionTypes.player.rawValue
         banana.physicsBody?.usesPreciseCollisionDetection = true
-        addChild(banana)        
+        addChild(banana)
+        
+        if currentPlayer == 1 { //if the player is not the bot
+            banana.position = CGPoint(x: player1.position.x - 30, y: player1.position.y + 40)
+            banana.physicsBody?.angularVelocity = -20
+            
+            let raiseArm = SKAction.setTexture(SKTexture(imageNamed: "player1Throw"))
+            let lowerArm = SKAction.setTexture(SKTexture(imageNamed: "player1"))
+            let pause = SKAction.wait(forDuration: 0.15)
+            let sequence = SKAction.sequence([raiseArm, pause, lowerArm])
+            player1.run(sequence)
+            
+            let impulse = CGVector(dx: cos(radians) * speed, dy: sin(radians) * speed) //pre-set formula
+            banana.physicsBody?.applyImpulse(impulse)
+            
+        } else {
+            banana.position = CGPoint(x: player2.position.x + 30, y: player2.position.y + 30)
+                     banana.physicsBody?.angularVelocity = 20
+                     
+                     let raiseArm = SKAction.setTexture(SKTexture(imageNamed: "player2Throw"))
+                     let lowerArm = SKAction.setTexture(SKTexture(imageNamed: "player2"))
+                     let pause = SKAction.wait(forDuration: 0.15)
+                     let sequence = SKAction.sequence([raiseArm, pause, lowerArm])
+                     player2.run(sequence)
+                     
+                     let impulse = CGVector(dx: cos(radians) * -speed, dy: sin(radians) * speed) //pre-set formula, minus so it moves to the left
+                     banana.physicsBody?.applyImpulse(impulse)
+        }
     }
     
     func createPlayers() {
