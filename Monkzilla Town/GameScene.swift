@@ -30,6 +30,7 @@ class GameScene: SKScene {
         //creating the sky
         backgroundColor = UIColor(hue: 0.669, saturation: 0.99, brightness: 0.67, alpha: 1)
         createBuildings()
+        createPlayers()
     }
     
     func createBuildings() {
@@ -48,10 +49,27 @@ class GameScene: SKScene {
             buildings.append(building) //keeping track of all buildings
         }
     }
+    
+    func launch(angle: Int, velocity: Int) {
         
-        func launch(angle: Int, velocity: Int) {
-            
-        }
+        let speed = Double(velocity) / 10 //configuring the velocity
+        
+        let radians = deg2rad(degrees: angle) //configuring the velocity
+        
+        if banana != nil {
+            banana.removeFromParent()
+            banana = nil
+        } //clearing in case of error any doubling on-screen bananas
+        
+     banana = SKSpriteNode(imageNamed: "banana")
+        banana.name = "banana"
+        banana.physicsBody = SKPhysicsBody(circleOfRadius: banana.size.width / 2)
+        banana.physicsBody?.categoryBitMask = CollisionTypes.banana.rawValue
+        banana.physicsBody?.collisionBitMask = CollisionTypes.building.rawValue | CollisionTypes.player.rawValue
+        banana.physicsBody?.contactTestBitMask = CollisionTypes.building.rawValue | CollisionTypes.player.rawValue
+        banana.physicsBody?.usesPreciseCollisionDetection = true
+        addChild(banana)        
+    }
     
     func createPlayers() {
         player1 = SKSpriteNode(imageNamed: "player")
@@ -68,17 +86,21 @@ class GameScene: SKScene {
         addChild(player1)
         
         player2 = SKSpriteNode(imageNamed: "player")
-            player2.name = "player2"
-            player2.physicsBody = SKPhysicsBody(circleOfRadius: player2.size.width / 2)
-            player2.physicsBody?.categoryBitMask = CollisionTypes.player.rawValue //identifying category
-            player1.physicsBody?.collisionBitMask = CollisionTypes.banana.rawValue //who will bounce off
-            player1.physicsBody?.contactTestBitMask = CollisionTypes.banana.rawValue
-            player1.physicsBody?.isDynamic = false
-            
-        let player2Building = buildings[buildings.count - 2]
-            player2.position = CGPoint(x: player2Building.position.x, y: player2Building.position.y + (player2Building.size.height + player2.size.height) / 2) //the position of player 2
-            
-            addChild(player2)
+        player2.name = "player2"
+        player2.physicsBody = SKPhysicsBody(circleOfRadius: player2.size.width / 2)
+        player2.physicsBody?.categoryBitMask = CollisionTypes.player.rawValue //identifying category
+        player2.physicsBody?.collisionBitMask = CollisionTypes.banana.rawValue //who will bounce off
+        player2.physicsBody?.contactTestBitMask = CollisionTypes.banana.rawValue
+        player2.physicsBody?.isDynamic = false
         
+        let player2Building = buildings[buildings.count - 2]
+        player2.position = CGPoint(x: player2Building.position.x, y: player2Building.position.y + (player2Building.size.height + player2.size.height) / 2) //the position of player 2
+        
+        addChild(player2)
+    }
+    
+    //converting between degrees and radiance
+    func deg2rad(degrees: Int) -> Double {
+        return Double(degrees) * .pi / 180
     }
 }
