@@ -77,7 +77,7 @@ class GameViewController: UIViewController {
         velocitySlider.isHidden = true
         velocityLabel.isHidden = true
         
-        launchButton.isHidden = false
+        launchButton.isHidden = true
         
         currentGame?.launch(angle: Int(angleSlider.value), velocity: Int(velocitySlider.value))
     }
