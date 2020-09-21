@@ -14,7 +14,7 @@ enum CollisionTypes: UInt32 {
     case player = 4
 }
 
-class GameScene: SKScene {
+class GameScene: SKScene, SKPhysicsContactDelegate {
     var buildings = [BuildingNode]()
     weak var viewController: GameViewController?
     
@@ -31,6 +31,8 @@ class GameScene: SKScene {
         backgroundColor = UIColor(hue: 0.669, saturation: 0.99, brightness: 0.67, alpha: 1)
         createBuildings()
         createPlayers()
+        
+        physicsWorld.contactDelegate = self
     }
     
     func createBuildings() {
@@ -61,7 +63,7 @@ class GameScene: SKScene {
             banana = nil
         } //clearing in case of error any doubling on-screen bananas
         
-     banana = SKSpriteNode(imageNamed: "banana")
+        banana = SKSpriteNode(imageNamed: "banana")
         banana.name = "banana"
         banana.physicsBody = SKPhysicsBody(circleOfRadius: banana.size.width / 2)
         banana.physicsBody?.categoryBitMask = CollisionTypes.banana.rawValue
@@ -85,16 +87,16 @@ class GameScene: SKScene {
             
         } else {
             banana.position = CGPoint(x: player2.position.x + 30, y: player2.position.y + 30)
-                     banana.physicsBody?.angularVelocity = 20
-                     
-                     let raiseArm = SKAction.setTexture(SKTexture(imageNamed: "player2Throw"))
-                     let lowerArm = SKAction.setTexture(SKTexture(imageNamed: "player2"))
-                     let pause = SKAction.wait(forDuration: 0.15)
-                     let sequence = SKAction.sequence([raiseArm, pause, lowerArm])
-                     player2.run(sequence)
-                     
-                     let impulse = CGVector(dx: cos(radians) * -speed, dy: sin(radians) * speed) //pre-set formula, minus so it moves to the left
-                     banana.physicsBody?.applyImpulse(impulse)
+            banana.physicsBody?.angularVelocity = 20
+            
+            let raiseArm = SKAction.setTexture(SKTexture(imageNamed: "player2Throw"))
+            let lowerArm = SKAction.setTexture(SKTexture(imageNamed: "player2"))
+            let pause = SKAction.wait(forDuration: 0.15)
+            let sequence = SKAction.sequence([raiseArm, pause, lowerArm])
+            player2.run(sequence)
+            
+            let impulse = CGVector(dx: cos(radians) * -speed, dy: sin(radians) * speed) //pre-set formula, minus so it moves to the left
+            banana.physicsBody?.applyImpulse(impulse)
         }
     }
     
@@ -130,4 +132,67 @@ class GameScene: SKScene {
     func deg2rad(degrees: Int) -> Double {
         return Double(degrees) * .pi / 180
     }
-}
+    
+    func didBegin(_ contact: SKPhysicsContact) {
+        let firstBody: SKPhysicsBody
+        let secondBody: SKPhysicsBody
+        
+        if contact.bodyA.categoryBitMask < contact.bodyB.categoryBitMask {
+            firstBody = contact.bodyA
+            secondBody = contact.bodyB
+        } else {
+            firstBody = contact.bodyB
+            secondBody = contact.bodyA
+        }
+        
+        guard let firstNode = firstBody.node else { return }
+        guard let secondNode = secondBody.node else { return }
+        
+        if firstNode.name == "banana" && secondNode.name == "building" {
+            bananaHit(building: secondNode, atPoint: contact.contactPoint)
+        }
+        
+        if firstNode.name == "banana" && secondNode.name == "player1" {
+            destroy(player: player1)
+        }
+        
+        if firstNode.name == "banana" && secondNode.name == "player2" {
+            destroy(player: player2)
+        }
+    }
+        
+        func destroy(player: SKSpriteNode) {
+            if let explosion = SKEmitterNode(fileNamed: "hitPlayer") {
+                explosion.position = player.position
+                addChild(explosion)
+            }
+            
+            //removing player from game and starting a new game
+            player.removeFromParent()
+            banana.removeFromParent()
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                let newGame = GameScene(size: self.size)
+                newGame.viewController = self.viewController
+                self.viewController?.currentGame = newGame
+                
+                self.changePlayer()
+                newGame.currentPlayer = self.currentPlayer
+                
+                //transitioning on a newGame after defeat
+                let transition = SKTransition.doorway(withDuration: 2)
+                self.view?.presentScene(newGame, transition: transition)
+            }
+        }
+        
+        func changePlayer() {
+            if currentPlayer == 1 {
+                currentPlayer = 2
+            } else {
+                currentPlayer = 1
+            }
+            
+            viewController?.activatePlayer(number: currentPlayer)
+        }
+    }
+
