@@ -160,39 +160,56 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             destroy(player: player2)
         }
     }
-        
-        func destroy(player: SKSpriteNode) {
-            if let explosion = SKEmitterNode(fileNamed: "hitPlayer") {
-                explosion.position = player.position
-                addChild(explosion)
-            }
-            
-            //removing player from game and starting a new game
-            player.removeFromParent()
-            banana.removeFromParent()
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                let newGame = GameScene(size: self.size)
-                newGame.viewController = self.viewController
-                self.viewController?.currentGame = newGame
-                
-                self.changePlayer()
-                newGame.currentPlayer = self.currentPlayer
-                
-                //transitioning on a newGame after defeat
-                let transition = SKTransition.doorway(withDuration: 2)
-                self.view?.presentScene(newGame, transition: transition)
-            }
+    
+    func destroy(player: SKSpriteNode) {
+        if let explosion = SKEmitterNode(fileNamed: "hitPlayer") {
+            explosion.position = player.position
+            addChild(explosion)
         }
         
-        func changePlayer() {
-            if currentPlayer == 1 {
-                currentPlayer = 2
-            } else {
-                currentPlayer = 1
-            }
+        //removing player from game and starting a new game
+        player.removeFromParent()
+        banana.removeFromParent()
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            let newGame = GameScene(size: self.size)
+            newGame.viewController = self.viewController
+            self.viewController?.currentGame = newGame
             
-            viewController?.activatePlayer(number: currentPlayer)
+            self.changePlayer()
+            newGame.currentPlayer = self.currentPlayer
+            
+            //transitioning on a newGame after defeat
+            let transition = SKTransition.doorway(withDuration: 2)
+            self.view?.presentScene(newGame, transition: transition)
         }
     }
+    
+    func bananaHit(building: SKNode, atPoint contactPoint: CGPoint) {
+        guard let building = building as? BuildingNode else { return }
+        
+        //find out hwich part of the building was hit and convert the collision point the into the coordinates of the our BuildingNode
+        let buildingLocation = convert(contactPoint, to: building)
+        building.hit(at: buildingLocation)
+        
+        if let explosion = SKEmitterNode(fileNamed: "hitBuilding") {
+            explosion.position = contactPoint
+            addChild(explosion)
+        }
+        
+        banana.name = ""
+        banana.removeFromParent()
+        banana = nil
+    }
+    
+    func changePlayer() {
+        if currentPlayer == 1 {
+            currentPlayer = 2
+        } else {
+            currentPlayer = 1
+        }
+        
+        viewController?.activatePlayer(number: currentPlayer)
+    }
+}
 
