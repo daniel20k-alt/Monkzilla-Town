@@ -77,7 +77,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             banana.physicsBody?.angularVelocity = -20
             
             let raiseArm = SKAction.setTexture(SKTexture(imageNamed: "player1Throw"))
-            let lowerArm = SKAction.setTexture(SKTexture(imageNamed: "player1"))
+            let lowerArm = SKAction.setTexture(SKTexture(imageNamed: "player"))
             let pause = SKAction.wait(forDuration: 0.15)
             let sequence = SKAction.sequence([raiseArm, pause, lowerArm])
             player1.run(sequence)
