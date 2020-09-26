@@ -86,7 +86,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             banana.physicsBody?.applyImpulse(impulse)
             
         } else {
-            banana.position = CGPoint(x: player2.position.x + 30, y: player2.position.y + 30)
+            banana.position = CGPoint(x: player2.position.x + 30, y: player2.position.y + 40)
             banana.physicsBody?.angularVelocity = 20
             
             let raiseArm = SKAction.setTexture(SKTexture(imageNamed: "player2Throw"))
@@ -216,13 +216,16 @@ if let firstNode = firstBody.node {
     }
     
     override func update(_ currentTime: TimeInterval) {
-        guard banana != nil else { return }
+        if banana != nil {
         
         if abs(banana.position.y) > 1000 { //if the banana goes after the screen, make positive
             banana.removeFromParent()
             banana = nil
             changePlayer()
+            }
         }
+    }
+            override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
     }
 }
 
