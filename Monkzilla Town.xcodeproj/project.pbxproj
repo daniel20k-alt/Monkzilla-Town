@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EE4C9B92251FD356005CC5C2 /* hitBuilding.sks in Resources */ = {isa = PBXBuildFile; fileRef = EE4C9B90251FD356005CC5C2 /* hitBuilding.sks */; };
+		EE4C9B93251FD356005CC5C2 /* hitPlayer.sks in Resources */ = {isa = PBXBuildFile; fileRef = EE4C9B91251FD356005CC5C2 /* hitPlayer.sks */; };
 		EECE691A251003270023D948 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EECE6919251003270023D948 /* AppDelegate.swift */; };
 		EECE691C251003270023D948 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = EECE691B251003270023D948 /* GameScene.sks */; };
 		EECE6920251003270023D948 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = EECE691F251003270023D948 /* GameScene.swift */; };
@@ -18,8 +20,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		EE4C9B8E25162704005CC5C2 /* hitPlayer.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = hitPlayer.sks; sourceTree = "<group>"; };
-		EE4C9B8F25162704005CC5C2 /* hitBuilding.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = hitBuilding.sks; sourceTree = "<group>"; };
+		EE4C9B90251FD356005CC5C2 /* hitBuilding.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = hitBuilding.sks; path = "../../../../HackingWithSwift-Downloads/Classic/project29/Project29/hitBuilding.sks"; sourceTree = "<group>"; };
+		EE4C9B91251FD356005CC5C2 /* hitPlayer.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = hitPlayer.sks; path = "../../../../HackingWithSwift-Downloads/Classic/project29/Project29/hitPlayer.sks"; sourceTree = "<group>"; };
 		EECE6916251003270023D948 /* Monkzilla Town.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Monkzilla Town.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EECE6919251003270023D948 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EECE691B251003270023D948 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -71,8 +73,8 @@
 				EECE69262510032E0023D948 /* Assets.xcassets */,
 				EECE69282510032E0023D948 /* LaunchScreen.storyboard */,
 				EECE692B2510032E0023D948 /* Info.plist */,
-				EE4C9B8F25162704005CC5C2 /* hitBuilding.sks */,
-				EE4C9B8E25162704005CC5C2 /* hitPlayer.sks */,
+				EE4C9B90251FD356005CC5C2 /* hitBuilding.sks */,
+				EE4C9B91251FD356005CC5C2 /* hitPlayer.sks */,
 			);
 			path = "Monkzilla Town";
 			sourceTree = "<group>";
@@ -136,6 +138,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				EECE6925251003270023D948 /* Main.storyboard in Resources */,
+				EE4C9B92251FD356005CC5C2 /* hitBuilding.sks in Resources */,
+				EE4C9B93251FD356005CC5C2 /* hitPlayer.sks in Resources */,
 				EECE691C251003270023D948 /* GameScene.sks in Resources */,
 				EECE69272510032E0023D948 /* Assets.xcassets in Resources */,
 				EECE692A2510032E0023D948 /* LaunchScreen.storyboard in Resources */,
@@ -299,6 +303,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7FZ5UVTS24;
 				INFOPLIST_FILE = "Monkzilla Town/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -317,6 +322,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7FZ5UVTS24;
 				INFOPLIST_FILE = "Monkzilla Town/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

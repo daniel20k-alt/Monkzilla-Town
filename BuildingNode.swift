@@ -22,11 +22,12 @@ class BuildingNode: SKSpriteNode {
     }
     
     func configurePhysics() {
-        physicsBody = SKPhysicsBody(texture: texture!, size: size)
+        self.physicsBody = SKPhysicsBody(texture: texture!, size: self.size)
         physicsBody?.isDynamic = false
         
         physicsBody?.categoryBitMask = CollisionTypes.building.rawValue //what it represents
         physicsBody?.collisionBitMask = CollisionTypes.banana.rawValue //what it interacts with
+        physicsBody?.contactTestBitMask = CollisionTypes.banana.rawValue
     }
     
     func drawBuilding(size: CGSize) -> UIImage {
@@ -36,6 +37,7 @@ class BuildingNode: SKSpriteNode {
             let rectangle = CGRect(x: 0, y: 0, width: size.width, height: size.height)
             
             let color: UIColor
+            
             switch Int.random(in: 0...2) {
             case 0:
                 color = UIColor(hue: 0.502, saturation: 0.98, brightness: 0.67, alpha: 1)
@@ -66,6 +68,7 @@ class BuildingNode: SKSpriteNode {
             }
         }
         return img
+
     }
     
     func hit(at point: CGPoint) {

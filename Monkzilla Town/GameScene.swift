@@ -16,7 +16,7 @@ enum CollisionTypes: UInt32 {
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
     var buildings = [BuildingNode]()
-    weak var viewController: GameViewController?
+    weak var viewController: GameViewController!
     
     //defining the SKSpriteNodes - player 1, player 2 and the throwing object
     var player1: SKSpriteNode!
@@ -90,7 +90,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             banana.physicsBody?.angularVelocity = 20
             
             let raiseArm = SKAction.setTexture(SKTexture(imageNamed: "player2Throw"))
-            let lowerArm = SKAction.setTexture(SKTexture(imageNamed: "player2"))
+            let lowerArm = SKAction.setTexture(SKTexture(imageNamed: "player"))
             let pause = SKAction.wait(forDuration: 0.15)
             let sequence = SKAction.sequence([raiseArm, pause, lowerArm])
             player2.run(sequence)
@@ -145,12 +145,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             secondBody = contact.bodyA
         }
         
-        guard let firstNode = firstBody.node else { return }
-        guard let secondNode = secondBody.node else { return }
-        
+if let firstNode = firstBody.node {
+    if let secondNode = secondBody.node {
         if firstNode.name == "banana" && secondNode.name == "building" {
-            bananaHit(building: secondNode, atPoint: contact.contactPoint)
-        }
+            bananaHit(building: secondNode as! BuildingNode, atPoint: contact.contactPoint)
+        }//inspect problem here
         
         if firstNode.name == "banana" && secondNode.name == "player1" {
             destroy(player: player1)
@@ -160,18 +159,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             destroy(player: player2)
         }
     }
-    
+        }
+    }
+    //not currently working
     func destroy(player: SKSpriteNode) {
-        if let explosion = SKEmitterNode(fileNamed: "hitPlayer") {
+        let explosion = SKEmitterNode(fileNamed: "hitPlayer")!
             explosion.position = player.position
             addChild(explosion)
-        }
+        
         
         //removing player from game and starting a new game
         player.removeFromParent()
         banana.removeFromParent()
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
             let newGame = GameScene(size: self.size)
             newGame.viewController = self.viewController
             self.viewController?.currentGame = newGame
@@ -180,7 +181,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             newGame.currentPlayer = self.currentPlayer
             
             //transitioning on a newGame after defeat
-            let transition = SKTransition.doorway(withDuration: 2)
+            let transition = SKTransition.doorway(withDuration: 1.5)
             self.view?.presentScene(newGame, transition: transition)
         }
     }
@@ -192,10 +193,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let buildingLocation = convert(contactPoint, to: building)
         building.hit(at: buildingLocation)
         
-        if let explosion = SKEmitterNode(fileNamed: "hitBuilding") {
+        let explosion = SKEmitterNode(fileNamed: "hitBuilding")!
             explosion.position = contactPoint
             addChild(explosion)
-        }
+        
         
         banana.name = ""
         banana.removeFromParent()
@@ -223,6 +224,5 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             changePlayer()
         }
     }
-    
 }
 
